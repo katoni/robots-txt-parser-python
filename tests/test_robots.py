@@ -114,7 +114,7 @@ class RobotsTest(unittest.TestCase):
         # The unhipbot bot
         self.assertFalse(rp.is_allowed('unhipbot', 'http://example.org/'))
         self.assertFalse(rp.is_allowed('unhipbot', 'http://example.org/index.html'))
-        #self.assertTrue(rp.is_allowed('unhipbot', 'http://example.org/robots.txt')) TODO
+        self.assertTrue(rp.is_allowed('unhipbot', 'http://example.org/robots.txt'))
         self.assertFalse(rp.is_allowed('unhipbot', 'http://example.org/server.html'))
         self.assertFalse(rp.is_allowed('unhipbot', 'http://example.org/services/fast.html'))
         self.assertFalse(rp.is_allowed('unhipbot', 'http://example.org/services/slow.html'))
@@ -153,7 +153,7 @@ class RobotsTest(unittest.TestCase):
         # All others
         self.assertFalse(rp.is_allowed('anything', 'http://example.org/'))
         self.assertFalse(rp.is_allowed('anything', 'http://example.org/index.html'))
-        #self.assertTrue(rp.is_allowed('anything', 'http://example.org/robots.txt')) TODO
+        self.assertTrue(rp.is_allowed('anything', 'http://example.org/robots.txt'))
         self.assertTrue(rp.is_allowed('anything', 'http://example.org/server.html'))
         self.assertTrue(rp.is_allowed('anything', 'http://example.org/services/fast.html'))
         self.assertTrue(rp.is_allowed('anything', 'http://example.org/services/slow.html'))

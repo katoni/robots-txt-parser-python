@@ -251,6 +251,9 @@ class _Ruleset(object):
 
         url = _unquote_path(url)
 
+        if url == '/robots.txt':
+            return True
+
         done = False
         i = 0
         while not done:
