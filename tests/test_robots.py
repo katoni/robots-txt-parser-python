@@ -77,7 +77,7 @@ class RobotsTest(unittest.TestCase):
         self.assertTrue(rp.is_allowed('agent', 'http://example.org/no/colon/in/this/line'))
 
     def test_utf8_bom(self):
-        """If there's a utf-8 BOM, we should parse it as such"""
+        """If there's a UTF-8 BOM, we should parse it as such"""
         rp = robotstxtparser.RobotExclusionRulesParser()
         rp.parse(codecs.BOM_UTF8 + b'''
             User-Agent: agent
@@ -163,3 +163,21 @@ class RobotsTest(unittest.TestCase):
         self.assertFalse(rp.is_allowed('anything', 'http://example.org/%7Ejim/jim.html'))
         self.assertTrue(rp.is_allowed('anything', 'http://example.org/%7Emak/mak.html'))
 
+    def test_support_grouping_blank_lines(self):
+        """Make sure blank lines are ignored"""
+        rp = robotstxtparser.RobotExclusionRulesParser()
+        rp.parse('''
+            User-Agent: agent
+            
+            Allow: /path
+            
+            Disallow: /tmp
+            
+            User-Agent: other
+            
+            Disallow: /path
+        ''')
+
+        self.assertTrue(rp.is_allowed('agent', 'http://example.org/path'))
+        self.assertFalse(rp.is_allowed('agent', 'http://example.org/tmp'))
+        self.assertFalse(rp.is_allowed('other', 'http://example.org/path'))

@@ -556,12 +556,7 @@ class RobotExclusionRulesParser(object):
                 line = line.strip()
 
                 if not line:
-                    # An empty line indicates the end of a ruleset.
-                    if current_ruleset and current_ruleset.is_not_empty():
-                        self.__rulesets.append(current_ruleset)
-
-                    current_ruleset = None
-                    previous_line_was_a_user_agent = False
+                    pass
                 else:
                     # Each non-empty line falls into one of six categories:
                     # 1) User-agent: blah blah blah
