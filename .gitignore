@@ -1,1 +1,9 @@
+# Binaries and build artifacts
+*.pyc
+*.o
+*.so
+build/
+dist/
+robotstextparser.egg-info/
+
 /.idea
