@@ -678,7 +678,7 @@ class RobotFileParserLookalike(RobotExclusionRulesParser):
         RobotExclusionRulesParser.fetch(self, self._user_provided_url)
 
     def parse(self, lines):
-        RobotExclusionRulesParser.parse(self, ''.join(lines))
+        RobotExclusionRulesParser.parse(self, '\n'.join(lines))
 
     def can_fetch(self, user_agent, url, syntax=GYM2008):
         return RobotExclusionRulesParser.is_allowed(self, user_agent, url, syntax)
