@@ -1,7 +1,7 @@
 import codecs
 import unittest
 
-from robotstxtparser import robotstxtparser
+import robotstxtparser
 
 
 class RobotsTest(unittest.TestCase):
@@ -181,3 +181,21 @@ class RobotsTest(unittest.TestCase):
         self.assertTrue(rp.is_allowed('agent', 'http://example.org/path'))
         self.assertFalse(rp.is_allowed('agent', 'http://example.org/tmp'))
         self.assertFalse(rp.is_allowed('other', 'http://example.org/path'))
+
+    def test_wildcard(self):
+        """Test wildcard directives"""
+        rp = robotstxtparser.RobotExclusionRulesParser()
+        rp.parse('''
+            User-Agent: agent
+            Disallow: */foo
+            Disallow: /*.gif$
+            
+            User-Agent: *
+            Allow: *****************/*.js$
+        ''')
+
+        self.assertFalse(rp.is_allowed('agent', 'http://example.org/foo'))
+        self.assertFalse(rp.is_allowed('agent', 'http://example.org/path/foo/bar'))
+        self.assertFalse(rp.is_allowed('agent', 'http://example.org/image.gif'))
+        self.assertTrue(rp.is_allowed('agent', 'http://example.org/image.jpg'))
+        self.assertTrue(rp.is_allowed('other', 'http://example.org/inlife/daily/fashion-20160727/'))
