@@ -16,6 +16,7 @@ setuptools.setup(
     url="https://github.com/katoni/robotexclusionrulesparser",
     license='BSD',
     packages=setuptools.find_packages(),
+    py_modules=['robotstxtparser'],
     classifiers=[
         "License :: OSI Approved :: BSD License",
         "Programming Language :: Python :: 3",
